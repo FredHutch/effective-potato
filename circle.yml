@@ -25,11 +25,11 @@ test:
     - echo "#FIXME write tests"
 
 deployment:
-  master:
+  to_production:
     branch: master
     commands:
       - docker login -e ${DOCKER_EMAIL} -u ${DOCKER_USER} -p ${DOCKER_PASS}
       - docker push fredhutch/effective-potato:${TAG}
       - docker push fredhutch/effective-potato:latest
       - sleep 20
-      - rancher-compose-v0.12.5/rancher-compose --project-name translationalgenomics --url ${RANCHER_API_URI} --access-key ${RANCHER_API_KEY} --secret-key ${RANCHER_API_SECRET} up -d --pull --force-upgrade --confirm-upgrade effective-potato
+      - rancher-compose-v0.12.5/rancher-compose --project-name effective-potato --url ${RANCHER_API_URI} --access-key ${RANCHER_API_KEY} --secret-key ${RANCHER_API_SECRET} up -d --pull --force-upgrade --confirm-upgrade effective-potato
