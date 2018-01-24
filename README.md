@@ -1,7 +1,5 @@
 # Using CircleCI, Docker, and Rancher to Deploy a Web Gateway
 
-> Just a quick write-up while I've got it fresh in my mind.  For reference, check the "choose your own omics adventure" repository.
-
 As with most things, at the core is GitHub.  Webhooks triggered by events here
 (merge, push, etc.) are sent to the on-premises CircleCI server
 (circle.fhcrc.org) which performs the necessary actions to build pages and
@@ -25,21 +23,21 @@ this example for the following discussion.
 
 ## `circle.yml` Sections
 
-### general:
+### `general`:
 
 The only thing indicated here is that we are building _just_ the master branch.
 The default behavior will build any branch in the repository.
 
-### machine:
+### `machine`:
 
 This section indicates we need both docker capabilites and Ruby installed
 (required for Jekyll).
 
-### environment:
+### `environment`:
 
 This just sets a couple variables we'll use downstream.
 
-### dependencies:
+### `dependencies`:
 
 We set up the build here- we need to download the rancher-compose client (the
 URL for which we will enter as an evnironment variable in the project) and use
@@ -50,13 +48,13 @@ other functions). Lastly, we build the docker container.
 Note that the Dockerfile contains a step where the built site is copied into
 the container.
 
-### test:
+### `test`:
 
 Currently we just echo some stuff out- a more advanced test might start the
 container and check that the webpage is served correctly, but for this example
 any command that exits 0 will be fine.
 
-### deployment:
+### `deployment`:
 
 This step will log into the Docker Hub and push our built images there- both
 the TAG and "latest" are pushed though we continually use "latest" in our
