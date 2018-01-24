@@ -1,0 +1,8 @@
+version: '2'
+services:
+  'effective-potato':
+    image: 'fredhutch/effective-potato:latest'
+    ports:
+      - "80"
+    labels:
+      io.rancher.container.pull_image: always
